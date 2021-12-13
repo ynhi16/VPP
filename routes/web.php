@@ -10,8 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//front
-Route::get('/','trangchuController@index');
 
-//end
-Route::get('/admin','AdminController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
