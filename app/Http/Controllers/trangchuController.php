@@ -19,7 +19,11 @@ class trangchuController extends Controller
     public function index()
     {
         $get = DB::table('sanpham')
-          ->join('hinhanh', 'sanpham.maSP', '=', 'hinhanh.maSP')
+            ->join('hinhanh', 'sanpham.maSP', '=', 'hinhanh.maSP')
+            ->orderby('sanpham.maSP', 'desc')
+            ->get();
+        $get1 = DB::table('sanpham')
+            ->join('hinhanh', 'sanpham.maSP', '=', 'hinhanh.maSP')
             ->orderby('sanpham.maSP', 'desc')
             ->get();
         $orders = DB::table('sanpham')
@@ -69,8 +73,8 @@ class trangchuController extends Controller
                 $distinct = array();
                 $distinct[] = $value;
             }
-        }        return view('page.trangchu')->with('sanphambc1', $distinct1)->with('sanphambc', $distinct);;
-
+        }
+        return view('page.trangchu')->with('sanphambc1', $distinct1)->with('sanphambc', $distinct);
     }
 
     public function dangnhap()
@@ -99,21 +103,27 @@ class trangchuController extends Controller
         $data = DB::table('nguoidung')->where('taikhoan', $taikhoan)->where('matkhau', $matkhau)->first();
 
         if ($data) {
+            $khoa = $data->trangThai;
+            if ($khoa == 1) {
+                $quyen = $data->maQuyen;
 
-            $quyen = $data->maQuyen;
+                if ($quyen == 3) {
 
-            if ($quyen == 3) {
+                    Session::put('nguoidung_name', $data->tenND);
+                    Session::put('nguoidung_id', $data->maND);
 
-                Session::put('nguoidung_name', $data->tenND);
-                Session::put('nguoidung_id', $data->maND);
+                    // return Redirect::to('/khachhang');
+                    return Redirect::to('/');
+                } else if ($quyen == 1) {
 
-                // return Redirect::to('/khachhang');
-                return Redirect::to('/');
-            } else if ($quyen == 1) {
+                    return Redirect::to('/admin');
+                }
+                else {
 
-                return Redirect::to('/admin');
+                    return Redirect::to('/dangnhap');
+                }
             } else {
-
+                Session::put('khoa', 'Tài khoản đã bị khóa');
                 return Redirect::to('/dangnhap');
             }
         } else {
@@ -128,10 +138,9 @@ class trangchuController extends Controller
     {
 
         //lấy thông tin sản phẩm theo maSP
-        $sanphamct = DB::table('sanpham')
-            ->join('hinhanh', 'sanpham.maSP', '=', 'hinhanh.maSP')
-            ->join('danhmuc', 'sanpham.maDM', '=', 'danhmuc.maDM')
-            ->where('sanpham.maSP', $maSP)->get();
+        $phanloaisp = DB::table('sanpham')
+            ->join('phanloai', 'sanpham.maSP', '=', 'phanloai.maSP')
+            ->where('sanpham.maSP', $maSP)->where('soLuong', '>', 0)->get();
         //lấy phân loại sản phẩm
         $phanloaisp = DB::table('sanpham')
             ->join('phanloai', 'sanpham.maSP', '=', 'phanloai.maSP')
@@ -208,11 +217,17 @@ class trangchuController extends Controller
                 $tym = "tym-den.png";
             }
         }
+        //binhluan
 
-        $maND = Session::get('nguoidung_id');
-        $nguoidung = DB::table('nguoidung')
-            ->where('maND', $maND)->get();
-        return view('page.chitietsanpham')->with('sanphamct', $sanphamct)->with('sanphambc1', $distinct1)->with('hinhanhs', $hinhanhs)->with('phanloaisp', $phanloaisp)->with('nguoidung', $nguoidung)->with('tym', $tym);
+        $sanphambl = DB::table('sanpham')
+            ->join('hinhanh', 'sanpham.maSP', '=', 'hinhanh.maSP')
+            ->join('danhmuc', 'sanpham.maDM', '=', 'danhmuc.maDM')
+            ->where('sanpham.maSP', $maSP)->limit(1)->get();
+        // echo '<pre>';
+        // print_r($sanphambl);
+        // echo '</pre>';
+        // exit;
+        return view('page.chitietsanpham')->with('sanphamct', $sanphamct)->with('sanphambc1', $distinct1)->with('hinhanhs', $hinhanhs)->with('phanloaisp', $phanloaisp)->with('sanphambl', $sanphambl)->with('tym', $tym);
     }
     public function timkiem(Request $request)
     {
@@ -269,7 +284,7 @@ class trangchuController extends Controller
 
 
 
-        
+
 
     //tạo tài khoản
     public function add_user(Request $request)
@@ -277,16 +292,16 @@ class trangchuController extends Controller
 
         $data = array();
         $data['tenND'] = $request->hoten;
-        $data['gioiTinh'] = null;
-        $data['ngaySinh'] = null;
-        $data['SDT'] = null;
+        // $data['gioiTinh'] = null;
+        // $data['ngaySinh'] = null;
+        // $data['SDT'] = null;
         $data['email'] = $request->email;
-        $data['diaChi'] = null;
+        // $data['diaChi'] = null;
         $data['taiKhoan'] = $request->taikhoan;
         $data['matKhau'] = $request->matkhau;
-        $data['maPX'] = null;
+        // $data['maPX'] = null;
         $data['maQuyen'] = 3;
-
+        $data['trangThai'] = 1;
         if ($request->hoten == null || $request->email == null || $request->taikhoan == null || $request->matkhau == null) {
 
             Session::put('msg', "Thông tin không hợp lệ!");
@@ -303,7 +318,6 @@ class trangchuController extends Controller
             } else {
 
                 $result = DB::table('nguoidung')->insert($data);
-
                 if ($result) {
 
                     $thongtin = DB::table('nguoidung')->orderby('maND', 'desc')->first();
@@ -366,17 +380,30 @@ class trangchuController extends Controller
                 'matKhau' => null,
                 'maPX' => null,
                 'maQuyen' => 3,
+                'trangThai' => 1,
 
             ]);
         }
         $hieu->login()->associate($orang);
         $hieu->save();
-
-        $account_name = Login::where('maND', $authUser->user)->first();
-        Session::put('nguoidung_name', $account_name->tenND);
-        Session::put('nguoidung_id', $account_name->maND);
-
+        if ($account_name = Login::where('maND', $authUser->user)->first()) {
+            $account_name = Login::where('maND', $authUser->user)->first();
+            Session::put('nguoidung_name', $account_name->tenND);
+            Session::put('nguoidung_id', $account_name->maND);
+        }
         return Redirect::to('/');
     }
-
+    public function load_comment(Request $request)
+    {
+        $maSP = $request->maSP;
+        $comment = DB::table('binhluan')
+            ->where('maSP', $maSP)->get();
+        foreach ($comment as $key => $comment) {
+            $output = '<div>' . $comment->binhluan . '</div>';
+        }
+        echo '<pre>';
+        print_r($comment);
+        echo '</pre>';
+        exit;
+    }
 }

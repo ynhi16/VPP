@@ -20,7 +20,7 @@ Route::get('/','trangchuController@index');
 Route::post('/auto-ajax','trangchuController@auto_ajax');
 //chi tiết sản phẩm
 Route::get('/chitietsanpham/{maSP}','trangchuController@chitietsanpham');
-
+Route::post('/load-comment','trangchuController@load_comment');
 //admin
 Route::get('/admin','AdminController@index');
 
@@ -45,11 +45,13 @@ Route::get('/del-product/{maSP}','ProductController@del_product');
 //
 Route::get('/all-bill','BillController@show_all_bill');
 Route::get('/bill-detail/{maHD}','BillController@show_bill_detail');
-Route::get('/update-bill/{maHD}','BillController@update_bill');
+Route::post('/update-bill/{maHD}','BillController@update_bill');
 Route::get('/del-bill/{maHD}','BillController@del_bill');
 Route::get('/del-bill-detail/{maHD}','BillController@del_bill_detail');
 //
 Route::get('/account','AccountProduct@show_account');
+Route::post('/update-account/{maND}','AccountProduct@update_account');
+Route::post('/update-account-open/{maND}','AccountProduct@update_account_open');
 //
 Route::get('/add-sale','SaleController@add_sale');
 Route::get('/all-sale','SaleController@all_sale');

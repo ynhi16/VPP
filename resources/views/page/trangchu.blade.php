@@ -39,7 +39,7 @@
             <div class="d-flex justify-content-between">
                 <div class="bd-highlight">
                     <div class="card" style="width: 150px; height: 200px;">
-                        <img src="{{('public/frontend/img/dm1_MiniSerenityDeskCalendar2022_hinh2.jpg')}}" class="card-img-top" alt="..." height="150px">
+                        <img src="{{('public/frontend/img/dm1_Calendar_hinh2.png')}}" class="card-img-top" alt="..." height="150px">
                         <div class="text-center card-body">
                             <p class="card-text">Calendar/ Schedule</p>
                         </div>

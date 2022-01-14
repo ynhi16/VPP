@@ -1,154 +1,154 @@
 @extends('layout')
 @section('trangchu')
-    <style>
-        .wp-chitiet {
-            /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
-            /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-            /* font-family: 'Times New Roman', Times, serif; */
-            /* font-family: 'Courier New', Courier, monospace; */
-            /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<style>
+    .wp-chitiet {
+        /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+        /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+        /* font-family: 'Times New Roman', Times, serif; */
+        /* font-family: 'Courier New', Courier, monospace; */
+        /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        .danhmuc {
-            padding-left: 10px;
-            margin: 0;
-            color: #8B8989;
-            margin-left: -15px;
-            margin-bottom: 15px;
-        }
+    .danhmuc {
+        padding-left: 10px;
+        margin: 0;
+        color: #8B8989;
+        margin-left: -15px;
+        margin-bottom: 15px;
+    }
 
-        .inf-sanpham {
-            border: solid #6666;
-            border-width: 1.5px;
-            border-radius: 5px;
-            height: 385px;
-            padding-left: 40px;
-            padding-top: 20px;
-            margin-left: 20px;
+    .inf-sanpham {
+        border: solid #6666;
+        border-width: 1.5px;
+        border-radius: 5px;
+        height: 385px;
+        padding-left: 40px;
+        padding-top: 20px;
+        margin-left: 20px;
 
-        }
+    }
 
-        .img-con {
-            margin-top: 5px;
+    .img-con {
+        margin-top: 5px;
 
-        }
+    }
 
-        .btnsoluong {
-            margin-top: 40px;
-            margin-bottom: 30px;
-        }
+    .btnsoluong {
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
 
-        .input-soluong {
-            width: 30px;
-            height: 30px;
-            padding-left: 4px;
-            border: none;
-        }
+    .input-soluong {
+        width: 30px;
+        height: 30px;
+        padding-left: 4px;
+        border: none;
+    }
 
-        .btn-soluong-giam {
-            border: solid #16A085;
-            background-color: white;
-            width: 29px;
-            height: 29px;
-            border-radius: 3px;
-            color: #16A085;
-            padding-left: 8px;
-        }
+    .btn-soluong-giam {
+        border: solid #16A085;
+        background-color: white;
+        width: 29px;
+        height: 29px;
+        border-radius: 3px;
+        color: #16A085;
+        padding-left: 8px;
+    }
 
-        .btn-soluong-tang {
-            background-color: #16A085;
-            border: solid #16A085;
-            width: 29px;
-            height: 29px;
-            border-radius: 3px;
-            color: white;
-            padding-left: 8px;
-        }
+    .btn-soluong-tang {
+        background-color: #16A085;
+        border: solid #16A085;
+        width: 29px;
+        height: 29px;
+        border-radius: 3px;
+        color: white;
+        padding-left: 8px;
+    }
 
-        .box-btn {
-            width: 100%;
-            margin-top: 50px;
-        }
+    .box-btn {
+        width: 100%;
+        margin-top: 50px;
+    }
 
-        .btn-chitiet {
-            width: 100%;
-            color: white;
-            margin-bottom: 15px;
-            background-color: black;
-            height: 45px;
-            border-radius: 30px;
-            font-size: 20px;
-        }
-
-
-
-        .img-sp-bc {
-            padding-left: 0;
-            padding-right: 10px;
-            margin-bottom: 50px;
-        }
-
-        .bg-xanh {
-            background-color: #C8F4F3;
-            border-radius: 20px;
-            padding-left: 5px;
-        }
-
-        .select-soluong {
-            height: 45px;
-        }
+    .btn-chitiet {
+        width: 100%;
+        color: white;
+        margin-bottom: 15px;
+        background-color: black;
+        height: 45px;
+        border-radius: 30px;
+        font-size: 20px;
+    }
 
 
 
-        /* ///image/// */
-        .tabs {
-            display: flex;
-            position: relative;
-        }
+    .img-sp-bc {
+        padding-left: 0;
+        padding-right: 10px;
+        margin-bottom: 50px;
+    }
 
-        .tab-item {
-            /* độ trong suốt */
-            opacity: 0.6;
-            cursor: pointer;
-            transition: all 0.5s ease;
-        }
+    .bg-xanh {
+        background-color: #C8F4F3;
+        border-radius: 20px;
+        padding-left: 5px;
+    }
 
-        .tab-item:hover {
-            opacity: 1;
-            background-color: rgba(194, 53, 100, 0.05);
-            border-color: rgba(194, 53, 100, 0.1);
-        }
+    .select-soluong {
+        height: 45px;
+    }
 
-        .tab-item.active {
-            opacity: 1;
-        }
 
-        .tab-content {
-            padding: 28px 0;
-        }
 
-        .tab-pane {
-            display: none;
-        }
+    /* ///image/// */
+    .tabs {
+        display: flex;
+        position: relative;
+    }
 
-        .tab-pane.active {
-            display: block;
-        }
+    .tab-item {
+        /* độ trong suốt */
+        opacity: 0.6;
+        cursor: pointer;
+        transition: all 0.5s ease;
+    }
 
-        /*tab iu 2*/
+    .tab-item:hover {
+        opacity: 1;
+        background-color: rgba(194, 53, 100, 0.05);
+        border-color: rgba(194, 53, 100, 0.1);
+    }
 
-        .tab-content2 {}
+    .tab-item.active {
+        opacity: 1;
+    }
 
-        .tab-pane2 {
-            color: #fff;
-            display: none;
-        }
+    .tab-content {
+        padding: 28px 0;
+    }
 
-        .tab-pane2.active2 {
-            display: block;
-        }
-    </style>
+    .tab-pane {
+        display: none;
+    }
+
+    .tab-pane.active {
+        display: block;
+    }
+
+    /*tab iu 2*/
+
+    .tab-content2 {}
+
+    .tab-pane2 {
+        color: #fff;
+        display: none;
+    }
+
+    .tab-pane2.active2 {
+        display: block;
+    }
+</style>
 </head>
 
 <body>
@@ -302,9 +302,9 @@
                         <?php $maND = Session::get('nguoidung_id'); ?>
                         @if ($maND)
                         <div class="col-md-1">
-                            
+
                             <p style="text-align: right; margin-top: 40px;"><a class="like" href="{{URL::to('update-yeuthich/'.$sanphamct[0]->maSP.'&'.$tym)}}"><img src="{{asset('public/frontend/img/'.$tym)}}" alt=""></a></p>
-                            
+
                         </div>
                         @endif
                     </div>
@@ -321,29 +321,31 @@
     <div style="margin-top: 100px;"></div>
     <div style="width: 87%; margin-left: 90px;">
         <p class="text-dendam" style="font-size: 25px;">Đánh giá</p>
-        @foreach($sanphamct as $key => $cate) 
-            <input type="type" name="nguoibl" class="nguoibl" value="{{$cate -> maSP}}" />
-            <div>tên</div>
-            <div>avatar</div>
-        @endforeach
-        <p class="text-dendam" style="font-size: 25px;">Sản phẩm bán chạy</p>
-        <div class="d-flex justify-content-between mb-5">
-            @foreach($sanphambc1 as $key => $cate)
-            <div class="card" style="width: 300px; height: 300px;">
-                <a href="{{URL::to('/chitietsanpham/'.$cate->maSP)}}">
-                    <img src="{{asset('public/frontend/img/'.$cate->tenHA)}}" class="card-img-top" alt="..." height="230px" width="98%"></a>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="card-text">{{$cate->tenSP}}</div>
+        <form method="POST">
+            {{csrf_field()}}
+            @foreach($sanphambl as $key => $sanphambl)
+            <input type="type" name="sanphambl" class="sanphambl" value="{{$sanphambl -> maSP}}" />
+            <div></div>
+            @endforeach
+            <div id="comment_show"></div>
+            <p class="text-dendam" style="font-size: 25px;">Sản phẩm bán chạy</p>
+            <div class="d-flex justify-content-between mb-5">
+                @foreach($sanphambc1 as $key => $cate)
+                <div class="card" style="width: 300px; height: 300px;">
+                    <a href="{{URL::to('/chitietsanpham/'.$cate->maSP)}}">
+                        <img src="{{asset('public/frontend/img/'.$cate->tenHA)}}" class="card-img-top" alt="..." height="230px" width="98%"></a>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div class="card-text">{{$cate->tenSP}}</div>
 
-                        <div class="d-flex align-items-start">
-                            <div class="text-end card-text price">{{$cate->donGia}}đ</div>
+                            <div class="d-flex align-items-start">
+                                <div class="text-end card-text price">{{$cate->donGia}}đ</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
-        </div>
     </div>
 
     </div>
@@ -413,14 +415,12 @@
         };
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            var maND = $('.nguoibl').val();
-            // console.log(maND);
-
-        });
+         $(document).ready(function(){
+            var maSP = $('.sanphambl');
+            alert(maSP);
+         });
     </script>
 
 
 
-
-@endsection
+    @endsection

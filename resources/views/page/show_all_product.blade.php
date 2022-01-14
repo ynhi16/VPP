@@ -22,6 +22,7 @@
 
         </div>
         @endforeach
+        {{$sanphambc->links()}}
     </div>
 </div>
 </div>
